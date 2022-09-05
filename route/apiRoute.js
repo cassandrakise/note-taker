@@ -2,38 +2,37 @@ const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 
+// Get route for retrieving all notes
 router.get('/notes', (req, res) => {
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
+// Post route for submitting feedback
 router.post('/notes', (req, res) => {
-    const { note-title, noteTextArea } = req.body;
+    // Destructuring assignment for the items in req.body
+    const { title, text } = req.body;
 
-    if ( noteTitle && noteTextArea) {
+    // If all the required properties are present
+    if ( title && text ) {
+        // Variable for the object we will save
         const newNote = {
-            noteTitle,
-            noteTextArea,
-            id: uuid(),
+            title,
+            text,
+            id: uuidv4(),
         };
     
     readAndAppend(newNote, './db/db.json');
 
+    const response = {
+        status: 'success',
+        body: newNote,
+    };
 
-};
+    res.json(response);
+} else {
+    res.json('Error in saving note');
+}
 
-//     let router = fs.readAndAppend('./db/db.json');
-//     router = JSON.parse(router);
-//     res.json(router);
-
-//     let userNote = {
-//         title: req.body.title,
-//         text: req.body.text,
-//         id: uuidv4(),
-//     };
-
-// router.push(userNote);
-//     fs.readAndAppend('./db/db.json', JSON.stringify(router));
-
-// });
+});
 
 module.exports = router;

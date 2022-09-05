@@ -35,18 +35,18 @@ router.post('/notes', (req, res) => {
 
 });
 
-router.delete('/notes', (req,res) => { // file locations may be wrong
-    const noteId = req.body.note_id;
+router.delete('/notes/:id', (req,res) => { 
+    const noteId = req.params.id;
     readFromFile('./db/db.json')
         .then((data) => JSON.parse(data))
         .then((json) => {
             
-            const response = json.filter((newNote) => newNote.note_id !== noteId);
+            const response = json.filter((newNote) => newNote.id !== noteId);
 
-            writeToFile('/notes', response);
+            writeToFile('./db/db.json', response);
 
             res.json(`Npte ${noteId} has been deleted`);
         });
 });
-
+3
 module.exports = router;

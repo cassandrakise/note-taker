@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 
 // Get route for retrieving all notes
 router.get('/notes', (req, res) => {
@@ -18,7 +18,7 @@ router.post('/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            id: uuidv4(),
+            note_id: uuidv4(),
         };
     
     readAndAppend(newNote, './db/db.json');
@@ -33,6 +33,20 @@ router.post('/notes', (req, res) => {
     res.json('Error in saving note');
 }
 
+});
+
+router.delete('/notes', (req,res) => { // file locations may be wrong
+    const noteId = req.body.note_id;
+    readFromFile('./db/db.json')
+        .then((data) => JSON.parse(data))
+        .then((json) => {
+            
+            const response = json.filter((newNote) => newNote.note_id !== noteId);
+
+            writeToFile('/notes', response);
+
+            res.json(`Npte ${noteId} has been deleted`);
+        });
 });
 
 module.exports = router;

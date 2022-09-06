@@ -1,21 +1,7 @@
 [
     {
-        "title": "Test Title",
-        "text": "Test text"
-    },
-    {
-        "title": "wr",
-        "text": "ewq",
-        "note_id": "485caeaf-7845-40d1-bfde-35506ee8b623"
-    },
-    {
-        "title": "why is this like this",
-        "text": "who knows",
-        "note_id": "05f6dd95-ed72-4e05-8859-52083c2cdc05"
-    },
-    {
-        "title": "qhdsaf",
-        "text": "fdsg",
-        "note_id": "00a3524d-663a-4043-aeea-ac5c6331d7f4"
+        "title": "Will this appear?",
+        "text": "or disappear?",
+        "note_id": "0546c4e6-4713-4c43-bc5a-cafd04249ec7"
     }
 ]

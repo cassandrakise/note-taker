@@ -21,6 +21,6 @@ The following application does the following once the server is started:
 ## Screenshot:
 ![ScreenShot](./images/module11image1.png)
 
-![ScreenShot](./images/module11image2.jpg)
+![ScreenShot](./images/module11image2.png)
 
-![ScreenShot](./images/module11image3.jpg)
+![ScreenShot](./images/module11image3.png)
